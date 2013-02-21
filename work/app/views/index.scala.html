@@ -1,0 +1,58 @@
+@(tasks: List[Task], taskForm: Form[String])
+
+@import helper._
+
+@main("TinyUrl Experiment") {
+
+	<h1>@tasks.size task(s)</h1>
+	
+	<ul>
+		@tasks.map { task =>
+			<li>
+				@task.hash
+				
+				@form(routes.Application.deleteTask(task.hash)) {
+					<input type="submit" value="Delete">
+				}
+			</li>
+		}
+	</ul>
+	
+	<h2>Add a new tinyUrl</h2>
+	
+	@form(routes.Application.newTask) {
+		
+			@inputText(taskForm("url"))
+			
+			<input type="submit" value="Create">
+			
+		}
+	
+	<h2>Retrieve Url for Hash</h2>
+	
+	<form>
+		Enter hash here: <input type="text" name="hash">
+  	    <button class="textBox" onClick="retrieveUrl()">Retrieve Url</button>
+	</form>
+	
+	<script>
+
+    function retrieveUrl() 
+    {  	
+    	var hash = $('input[name=hash]').val();
+		
+		alert("hash = " + hash);
+		
+    	// When the user has not entered a hash, alert to inform them.
+    	if (!hash)
+    	{
+    		alert("Please enter a hash first.");
+    	}
+    	else
+    	{
+			var hashUrl = "http://localhost:9000/tasks/1234"0;
+			window.location = "http://localhost:9000/tasks/1234";//hashUrl;
+    	}
+    }
+	</script>
+}
