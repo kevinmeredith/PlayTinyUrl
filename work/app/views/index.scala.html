@@ -29,30 +29,9 @@
 		}
 	
 	<h2>Retrieve Url for Hash</h2>
-	
-	<form>
-		Enter hash here: <input type="text" name="hash">
-  	    <button class="textBox" onClick="retrieveUrl()">Retrieve Url</button>
-	</form>
-	
-	<script>
 
-    function retrieveUrl() 
-    {  	
-    	var hash = $('input[name=hash]').val();
-		
-		alert("hash = " + hash);
-		
-    	// When the user has not entered a hash, alert to inform them.
-    	if (!hash)
-    	{
-    		alert("Please enter a hash first.");
-    	}
-    	else
-    	{
-			var hashUrl = "http://localhost:9000/tasks/1234"0;
-			window.location = "http://localhost:9000/tasks/1234";//hashUrl;
-    	}
-    }
-	</script>
+    <form action="/redirect" method="GET" >
+		Enter hash here: <input type="text" name="hash">
+  	    <button type="submit" class="textBox">Retrieve Url</button>
+	</form>
 }
