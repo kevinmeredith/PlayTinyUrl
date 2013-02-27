@@ -20,7 +20,7 @@ val task = {
 		SQL("select * from HashToUrl").as(task *)
 	}
 
-	def getTask(hash: Int): Option[String] = DB.withConnection { implicit c =>
+	def getTask(hash: String): Option[String] = DB.withConnection { implicit c =>
 		val url: Option[String] = SQL(
 		"""
 			select url from HashToUrl where hash = {hash};

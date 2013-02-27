@@ -31,14 +31,25 @@ object Application extends Controller {
 		)
 	}
 
-	def getTask(hash: Int) = Action {
-	  val url: Option[String] = Task.getTask(hash)
-	  println("url = " + url)
-	  
-	  url match {
-		case Some(url) => Redirect(url)
-		case None => NotFound("This URL leads nowhere. Nice try. :(")
-	  }
+
+  val RetrieveForm = Form(
+    "hash" -> nonEmptyText
+  )
+
+	def getTask = Action {  implicit request =>
+
+    RetrieveForm.bindFromRequest.fold(
+      errors => BadRequest("getTask: hash value is required but not submitted"),
+      hash => {
+        val url: Option[String] = Task.getTask(hash)
+        println("url = " + url)
+
+        url match {
+          case Some(url) => Redirect(url)
+          case None => NotFound("This URL leads nowhere. Nice try. :(")
+        }
+      }
+    )
 	}
 	
   def deleteTask(hash: Int) = Action {
